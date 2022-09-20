@@ -2,9 +2,9 @@
 
 namespace src\query;
 use PDO;
-use PDOException;
+use src\connect\config;
 
-class queryBuilder{
+class queryBuilder {
     private $columns;
 
     private $from;
@@ -15,15 +15,9 @@ class queryBuilder{
 
     private $where;
 
-    private $groups;
-
-    private $having;
-
     private $order;
 
     private $limit;
-
-    private $offset;
 
     public function __construct($tableName)
     {
@@ -47,6 +41,23 @@ class queryBuilder{
         return $this;
     }
 
+
+    public function join($table,$first,$operator,$second,$type='inner')
+    {
+        $this->join[] =[$table,$first,$operator,$second,$type];
+        return $this;
+    }
+
+    public function leftJoin($table,$first,$operator,$second)
+    {
+        return $this->join[] = [$table,$first,$operator,$second,'left'];
+    }
+
+    public function rightJoin($table,$first,$operator,$second)
+    {
+        return $this->join[] = [$table,$first,$operator,$second,'right'];
+    }
+    
     public function where($column,$operator,$value,$boolean = 'and')
     {
         $this->where[] = [$column,$operator,$value,$boolean];
@@ -56,6 +67,18 @@ class queryBuilder{
     public function orWhere($column,$operator,$value)
     {
         $this->where[] = [$column,$operator,$value,'or'];
+        return $this;
+    }
+
+    public function orderby($column,$direct = 'asc')
+    {
+        $this->order[] =[$column,$direct];
+        return $this;
+    }
+
+    public function limit($limit)
+    {
+        $this->limit = $limit;
         return $this;
     }
 
@@ -75,16 +98,51 @@ class queryBuilder{
 
         $sql .= ' FROM '. $this->from;
 
-        if (isset($this->where) && is_array($this->where)){
+        if (isset($this->where) && is_array($this->where)) {
             $sql .= ' WHERE ';
-            foreach ($this->where as $wk => $where){
+            foreach ($this->where as $wk => $where) {
                 $sql .= "$where[0] $where[1] $where[2]";
-                if ($wk < count($this->where)-1){
-                    $sql .= (strtolower($where[3]) === 'and')? ' AND':' OR';
+                if ($wk < count($this->where) - 1) {
+                    $sql .= (strtolower($where[3]) === 'and') ? ' AND' : ' OR';
                 }
             }
         }
 
-        return $sql;
+        if (isset($this->join) && is_array($this->join)){
+            foreach ($this->join as $join){
+                switch (strtolower($join[4])){
+                    case 'inner':
+                        $sql .= ' INNER JOIN';
+                    break;
+                    case 'left':
+                        $sql .= ' LEFT JOIN';
+                        break;
+                    case 'right':
+                        $sql .= ' RIGHT JOIN';
+                        break;
+                    default:
+                        $sql .= ' INNER JOIN';
+                        break;
+                }
+                $sql .= " $join[0] ON $join[1] $join[2] $join[3]";
+            }
+        }
+
+        if (isset($this->order) && is_array($this->order)){
+            $sql .= ' ORDER BY';
+            foreach ($this->order as $ok =>$or){
+                $sql .= " $or[0] $or[1]";
+                if ($ok < (count($this->order)-1)){
+                    $sql .= " ,";
+                }
+            }
+        }
+
+        if (isset($this->limit)){
+            $sql .= " LIMIT $this->limit";
+        }
+
+        return config::exQuery($sql);
+//            return $sql;
     }
 }

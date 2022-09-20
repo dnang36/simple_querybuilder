@@ -3,5 +3,12 @@
 require 'vendor/autoload.php';
 use src\query\queryBuilder;
 
-$quey = queryBuilder::table('123')->select('cot 1','cot 2')->orWhere('cot2','=','20')->where('cot1','>','30')->get();
-echo $quey;
+$quey = queryBuilder::table('user')
+    ->select('name','email')
+    ->join('user_order','user.id','=','user_order.user_id','right')
+//    ->orderby('id','DESC')
+//    ->limit(3)
+//    ->where('id','=','3')
+    ->get();
+
+//echo $quey;
