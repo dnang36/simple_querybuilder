@@ -6,6 +6,13 @@
 
 ### Download code và run code tại đường dẫn https://github.com/dnang36/simple_querybuilder
 
+## Install
+
+````
+composer require ngdang/simple_querybuilder
+````
+
+
 ## Kiến thức nắm được:
 ## 1. Giới thiệu PDO - PHP Data Objects
 - PHP Data Objects (PDO) là một lớp truy xuất cơ sở dữ liệu cung cấp một phương pháp thống nhất để làm việc với nhiều loại cơ sở dữ liệu khác nhau. Khi làm việc với PDO bạn sẽ không cần phải viết các câu lệnh SQL cụ thể mà chỉ sử dụng các phương thức mà PDO cung cấp, giúp tiết kiệm thời gian và làm cho việc chuyển đổi Hệ quản trị cơ sở dữ liệu trở nên dễ dàng hơn, chỉ đơn giản là thay đổi Connection String (chuỗi kết nối CSDL).
