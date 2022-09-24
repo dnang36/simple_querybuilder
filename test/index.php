@@ -16,7 +16,7 @@ use ngdang\dto\connect\config;
 $query = new QueryBuilder(config::connect($config));
 
 //
-//$insert = $query->insert('user',[
+//$query->insert('user',[
 //    ['name','address'],
 //    ["hung","thai binh"]
 //])->go();
@@ -28,7 +28,7 @@ $query = new QueryBuilder(config::connect($config));
 //    ->go();
 
 //$query->delete('user')
-//    ->where([['id','=',16]])
+//    ->where([['id','=',18]])
 //    ->go();
 
 $result = $query->select('user')
