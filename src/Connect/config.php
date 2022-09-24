@@ -30,7 +30,7 @@ class config{
         $stmt = $conn->prepare($query);
         $stmt->execute();
 
-        while ($result = $stmt->fetch()){
+        while ($result = $stmt->fetchObject()){
             print_r($result) ;
         }
     }
