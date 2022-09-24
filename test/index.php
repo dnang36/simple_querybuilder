@@ -1,14 +1,40 @@
 <?php
 
 require 'vendor/autoload.php';
-use ngdang\dto\query\queryBuilder;
 
-$quey = queryBuilder::table('user')
-    ->select('id','name')
-//    ->join('user_order','user.id','=','user_order.user_id','right')
-//    ->orderby('id','DESC')
+$config = [
+    'host' => 'localhost',
+    'dbname' => 'pdotest',
+    'charset' => 'utf8',
+    'username' => 'root',
+    'password' => '12345678',
+];
+
+use ngdang\dto\connect\QueryBuilder;
+use ngdang\dto\connect\config;
+
+$query = new QueryBuilder(config::connect($config));
+
+
+$insert = $query->insert('user',[
+    ['name','address'],
+    ["hung","thai binh"]
+])->go();
+
+$query->update('user',[
+    'name'=>'hưng chim ưng',
+    'address'=>'thái bình'
+    ])->where([['id','=',21]])
+    ->go();
+
+//$query->delete('user')
+//    ->where([['id','=',16]])
+//    ->go();
+
+$result = $query->select('user')
+//    ->where([['id','>',2]])
 //    ->limit(3)
-    ->where('id','=','3')
-    ->get();
+    ->all();
+print_r($result);
 
-//echo $quey;
+

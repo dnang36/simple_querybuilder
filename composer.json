@@ -10,10 +10,13 @@
     }
   ],
   "require": {
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {
-      "src\\query\\": "src/query/"
+      "ngdang\\dto\\connect\\": "src/Connect",
+      "ngdang\\dto\\query\\": "src/query/",
+      "ngdang\\dto\\": "src"
     }
   }
 }
