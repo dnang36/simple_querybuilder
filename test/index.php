@@ -15,17 +15,17 @@ use ngdang\dto\connect\config;
 
 $query = new QueryBuilder(config::connect($config));
 
-
-$insert = $query->insert('user',[
-    ['name','address'],
-    ["hung","thai binh"]
-])->go();
-
-$query->update('user',[
-    'name'=>'hưng chim ưng',
-    'address'=>'thái bình'
-    ])->where([['id','=',21]])
-    ->go();
+//
+//$insert = $query->insert('user',[
+//    ['name','address'],
+//    ["hung","thai binh"]
+//])->go();
+//
+//$query->update('user',[
+//    'name'=>'hưng chim ưng',
+//    'address'=>'thái bình'
+//    ])->where([['id','=',21]])
+//    ->go();
 
 //$query->delete('user')
 //    ->where([['id','=',16]])
