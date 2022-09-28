@@ -1,12 +1,12 @@
 {
   "name": "ngdang/simple_querybuilder",
-  "description": "description",
+  "description": "simple query builder by infktern",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
     {
-      "name": "ad",
-      "email": "email@example.com"
+      "name": "ngdang",
+      "email": "nguyendoandangndd@gmail.com"
     }
   ],
   "require": {
@@ -16,7 +16,8 @@
     "psr-4": {
       "ngdang\\dto\\connect\\": "src/Connect",
       "ngdang\\dto\\query\\": "src/query/",
-      "ngdang\\dto\\": "src"
+      "ngdang\\dto\\": "src/",
+      "ngdang\\dto\\test\\": "test/"
     }
   }
 }

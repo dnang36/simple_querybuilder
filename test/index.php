@@ -15,7 +15,6 @@ use ngdang\dto\connect\config;
 
 $query = new QueryBuilder(config::connect($config));
 
-//
 //$query->insert('user',[
 //    ['name','address'],
 //    ["hung","thai binh"]
@@ -37,4 +36,5 @@ $result = $query->select('user')
     ->all();
 print_r($result);
 
-
+$user = ngdang\dto\test\user::query($query)->select()->all();
+//print_r($user);

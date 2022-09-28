@@ -58,6 +58,47 @@ $query->delete('user')
     ->go();
 ```
 
+-result 
+````php
+Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [name] => dang
+            [address] => ha noi
+        )
+)
+````
+
+- use with PDO
+````php
+$user = ngdang\dto\test\user::query(clone $query)->select()->all();
+print_r($user);
+````
+- result with PDO
+````php
+[0] => ngdang\dto\test\user Object
+      (
+         [attributes:protected] => Array
+            (
+               [id] => 1
+               name] => dang
+               [address] => ha noi
+            )
+
+               [original:protected] => Array
+               (
+               )
+
+            [casts:protected] => Array
+                (
+                )
+
+                [table:protected] => user
+      )
+````
+
 ## Kiến thức nắm được:
 ## 1. Giới thiệu PDO - PHP Data Objects
 - PHP Data Objects (PDO) là một lớp truy xuất cơ sở dữ liệu cung cấp một phương pháp thống nhất để làm việc với nhiều loại cơ sở dữ liệu khác nhau. Khi làm việc với PDO bạn sẽ không cần phải viết các câu lệnh SQL cụ thể mà chỉ sử dụng các phương thức mà PDO cung cấp, giúp tiết kiệm thời gian và làm cho việc chuyển đổi Hệ quản trị cơ sở dữ liệu trở nên dễ dàng hơn, chỉ đơn giản là thay đổi Connection String (chuỗi kết nối CSDL).
